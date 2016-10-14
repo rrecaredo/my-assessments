@@ -1,0 +1,18 @@
+﻿$breakpoints: (
+  'tiny'         : only screen and ( max-width: 360px ),
+  'small'        : only screen and ( max-width: 767px ),
+  'medium'       : only screen and ( max-width: 991px ),
+  'large'        : only screen and ( min-width: 992px )
+);
+ 
+@mixin respond-to($name) {
+  @if map-has-key($breakpoints, $name) {
+	@media #{inspect(map-get($breakpoints, $name))} {
+	  @content;
+	}
+  }
+  @else {
+	@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+		+ "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

@@ -1,0 +1,59 @@
+﻿@import "_breakpoints.scss";
+
+/*-------------------------------------------*\
+  SIZES
+\*-------------------------------------------*/
+
+$cell-base: 8px;
+
+$gri-1x  : $cell-base * 1;
+$grid-2x  : $cell-base * 2;
+$grid-3x  : $cell-base * 3;
+$grid-4x  : $cell-base * 4;
+$grid-5x  : $cell-base * 5;
+$grid-6x  : $cell-base * 6;
+$grid-7x  : $cell-base * 7;
+$grid-8x  : $cell-base * 8;
+$grid-9x  : $cell-base * 9;
+$grid-10x : $cell-base * 10;
+$grid-11x : $cell-base * 11;
+$grid-12x : $cell-base * 12;
+
+@function grid($scale: 1) {
+    @return $cell-base * $scale;
+}
+
+/*-------------------------------------------*\
+  MIXINS
+\*-------------------------------------------*/
+
+@function get-col-width($col : 1, $total: 16) {
+    @return percentage($col  / $total);
+}
+
+@mixin grid-col-size($bp-name, $size){
+    @include respond-to($bp-name) {
+        @if ($size != hide) {
+            width: $size;
+        }
+        @else {
+            display: none !important;
+        }
+    }
+}
+
+@mixin grid-col($large : 100%, $medium: null, $small : null) {
+    @include grid-col-size(large, $large);
+
+    @if ($medium != null) {
+        @include grid-col-size(medium, $medium);
+    }
+
+    @if ($small != null) {
+        @include grid-col-size(medium, $small);
+    }
+}
+
+@mixin hide($name : large){
+    @include grid-col-size($name, hide);
+}

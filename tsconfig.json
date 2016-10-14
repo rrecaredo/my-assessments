@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module"                 : "commonjs",
+    "target"                 : "es5",
+    "noImplicitAny"          : true,
+    "sourceMap"              : true,
+    "emitDecoratorMetadata"  : true,
+    "experimentalDecorators" : true,
+    "noEmitHelpers"          : false,
+    "removeComments"         : false,
+    "moduleResolution"       : "node",
+    "allowJs"                : true,
+    "listFiles"              : true,
+    "outDir"                 : "./temp",
+    "noEmitOnError"          : true
+  },
+  "exclude": [
+    "node_modules",
+    "dev",
+    "assets"
+  ],
+  "include": [
+    "client/app/**/*.ts",
+    "typings/index.d.ts",
+    "typings/lodash.d.ts",
+    "typings/custom.d.ts"
+  ],
+  "compileOnSave" : false,
+  "buildOnSave"   : false
+}

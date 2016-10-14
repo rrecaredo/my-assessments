@@ -1,0 +1,37 @@
+﻿@import "../settings/_colors";
+
+/*------------------------------------*\
+  BORDER HELPERS
+\*------------------------------------*/
+
+@function get-border-color($variant) {
+    @if $variant == light {
+        @return $color-border-light;
+    } @else if $variant == dark {
+        @return $color-border;
+    } @else if $variant == brand {
+        @return $color-brand;
+    } @else {
+        @return $color-border;
+    }
+}
+
+@mixin border-bottom($variant: dark, $size : 1px) {
+    border-bottom: $size solid get-border-color($variant);
+}
+
+@mixin border-top($variant: dark, $size : 1px) {
+    border-top: $size solid get-border-color($variant);
+}
+
+@mixin border-left($variant: dark, $size : 1px) {
+    border-left: $size solid get-border-color($variant);
+}
+
+@mixin border-right($variant: dark, $size : 1px) {
+    border-right: $size solid get-border-color($variant);
+}
+
+@mixin border($variant: dark, $size : 1px) {
+    border: $size solid get-border-color($variant);
+}

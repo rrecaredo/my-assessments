@@ -1,0 +1,61 @@
+﻿// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+// =============================================================================
+// Shorthand for font-size + line-height setting
+// =============================================================================
+
+@mixin text-size($font-size, $line-height: null) {
+
+	font-size: $font-size;
+
+	@if ($line-height) {
+		line-height : $line-height;
+	}
+}
+
+// =============================================================================
+// Truncate Text
+// =============================================================================
+
+@mixin ellipsis (){
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    word-break: break-all; 
+    word-wrap: break-word;
+}
+
+@mixin non-ellipsis (){
+    overflow: hidden; 
+    white-space: normal;
+    text-overflow: unset; 
+}

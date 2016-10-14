@@ -1,0 +1,43 @@
+﻿/*------------------------------------*\
+  BASE COLORS
+\*------------------------------------*/
+
+$palette-wedgewood        : #008892;
+$palette-dark-sky         : #47515B;
+$palette-grey-sky         : #C1C3C6;
+$palette-light-sky        : #F6F6F7;
+$palette-lightgrey-sky    : #E0E2E4;
+$palette-chelsea-cucumber : #89BD21;
+$palette-bright-orange    : #FF8400;
+$palette-trendy-purple    : #763089;
+$palette-bright-orange    : #ff8400;
+$palette-black            : #000000;
+$palette-white            : #ffffff;
+$palette-porcelain        : #ECEDEE;
+$palette-iron             : #DADCDE;
+$palette-yellow-sea       : #F2B005;
+$palette-alizarin-crimson : #DB2D42;
+$palette-beryl-green      : #d9e6c1;
+$palette-moccasin         : #fce8b4;
+$palette-azalea           : #f5c0c6;
+$palette-celery           : #81aa30;
+
+/*------------------------------------*\
+  ENVIROMENT COLORS
+\*------------------------------------*/
+
+$color-brand              : $palette-wedgewood;
+$color-button             : $palette-wedgewood;
+$color-text               : $palette-dark-sky;
+$color-border             : $palette-grey-sky;
+$color-border-light       : $palette-iron;
+$color-disabled           : $palette-grey-sky;
+$color-sign               : $palette-grey-sky;
+$color-background         : $palette-porcelain;
+$color-row-background     : $palette-light-sky;
+$color-success            : $palette-celery;
+$color-notification       : $palette-yellow-sea;
+$color-warning            : $palette-alizarin-crimson;
+$color-success-light      : $palette-beryl-green;
+$color-notification-light : $palette-moccasin;
+$color-warning-light      : $palette-azalea;

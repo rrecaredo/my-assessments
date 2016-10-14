@@ -1,0 +1,19 @@
+﻿@import "../settings/_colors";
+@import "../tools/_grid";
+@import "../settings/_fonts";
+
+body {
+  overflow: auto;
+  background-color: white;
+  font-size: $font-size-base;
+  @extend %Roboto-light;
+  margin: 0;
+}
+
+input[type=text]::-ms-clear {
+  display: none;
+}
+
+.content {
+  padding: grid(2.5);
+}

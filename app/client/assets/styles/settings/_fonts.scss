@@ -1,0 +1,45 @@
+﻿/*------------------------------------*\
+  BASE FONTS
+\*------------------------------------*/
+
+$font-weights: (
+    thin        : 100,
+    light       : 300,
+    regular     : 400,
+    medium      : 500,
+    bold        : 700,
+    black       : 900
+);
+
+$roboto-family     : 'Roboto', sans-serif;
+$bree-light-family : 'Bree Light', sans-serif;
+
+%bree-light {
+    font-family: $bree-light-family;
+}
+
+@each $name, $value in $font-weights {
+    %Roboto-#{$name} {
+        font-family: $roboto-family;
+        font-weight: $value;
+    }
+}
+
+/*------------------------------------*\
+  FONT SIZES
+\*------------------------------------*/
+
+$font-size-base    : 14px;
+
+$font-size-tiny    : 10px; 
+$font-size-x-small : 12px; 
+$font-size-small   : 14px;
+$font-size-fa      : 16px;
+$font-size-medium  : 20px;
+$font-size-large   : 22px;
+$font-size-x-large : 24px;
+$font-size-huge    : 42px;
+
+$h1-font-size      : $font-size-huge;
+$h2-font-size      : $font-size-x-large;
+$h3-font-size      : $font-size-large;

@@ -1,0 +1,43 @@
+﻿@import "../tools/_breakpoints.scss";
+
+/*------------------------------------*\
+  UTILITIES
+\*------------------------------------*/
+
+.u-italic {
+    font-style: italic;
+}
+
+.u-bold {
+    font-weight: bold;
+}
+
+.u-upper {
+    text-transform: uppercase;
+}
+
+.u-center {
+    text-align: center;
+}
+
+.u-large-screens-only {
+    @include respond-to(medium){
+        display: none !important;
+    }
+}
+
+.u-text-elipsis {
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+}
+
+.u-scrollable {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.u-pointer:hover {
+    cursor: pointer;
+}
