@@ -11,8 +11,6 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;
 
-mongoose.connect('mongodb://heroku_73wk2frs:l3erf3l3rgohdj5aqn2d9qkjog@ds035006.mlab.com:35006/heroku_73wk2frs');
+mongoose.connect(require('/cconfig'));
 
-// ROUTES FOR OUR API
-// =============================================================================
 var router = express.Router();
