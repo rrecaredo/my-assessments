@@ -1,5 +1,6 @@
 var express    = require('express');
 var router     = express.Router();
+const auth     = require('.,/auth')();
 var Assessment = require('./models/assessment');
 
 const api = () => {
@@ -9,8 +10,7 @@ const api = () => {
     router.route('/assessments/:id')
         .get((req, res) => {})
         .put((req, res) => {})
-        .post((req, res) => {})
-        ;
+        .post((req, res) => {});
 
     return router;
 };

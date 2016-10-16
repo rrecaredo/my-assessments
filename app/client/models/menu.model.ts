@@ -1,5 +1,5 @@
 export interface IMenuItem {
     title : string;
-    url   : string;
+    state : string;
     alt?  : string | null;
 }

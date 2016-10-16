@@ -9,7 +9,7 @@ module.exports = [
         loader: (isRelease)
                 ? ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader")
                 : "style-loader!css-loader!postcss-loader",
-        include : [ path.resolve(__dirname, "../../app/client/assets/styles") ],
+        include : [ path.resolve(__dirname, "../../app/client") ],
     },
     {
         test    : /\.scss$/,
@@ -40,15 +40,12 @@ module.exports = [
     },
     {
         test    : /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        include: [ path.resolve(__dirname, "app/client/assets/fonts"), ],
+        include: [ path.resolve(__dirname, "../../app/client/assets") ],
         loader  : "url-loader?limit=10000&mimetype=application/font-woff"
     },
     {
         test    : /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        include: [
-            path.resolve(__dirname, "app/client/assets/fonts"),
-            path.resolve(__dirname, "app/client/assets/images")
-        ],
+        include: [ path.resolve(__dirname, "../../app/client/assets") ],
         loader  : "file-loader"
     },
     {

@@ -1,5 +1,6 @@
 <nav>
     <nav class="menu">
-        <a ng-repeat="item in vm.menuItems track by item.title" ng-href="{{::item.url}}" class="menu__item" href="/#/">{{::item.title}}</a>
+        <a ng-repeat="item in vm.menuItems track by item.title" ui-sref="{{::item.state}}" class="menu__item">{{::item.title}}</a>
+        <a ui-sref="login" class="menu__item">Login</a>
     </nav>
 </nav>

@@ -2,6 +2,7 @@
 /// <reference path="globals/angular-cookies/index.d.ts" />
 /// <reference path="globals/angular-mocks/index.d.ts" />
 /// <reference path="globals/angular-toastr/index.d.ts" />
+/// <reference path="globals/angular-ui-router/index.d.ts" />
 /// <reference path="globals/angular/index.d.ts" />
 /// <reference path="globals/bootstrap/index.d.ts" />
 /// <reference path="globals/jasmine/index.d.ts" />

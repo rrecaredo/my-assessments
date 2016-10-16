@@ -1,10 +1,11 @@
-import {Component} from '../../common/decorators';
+import {Component} from '../../utils/decorators';
 import {IMenuItem} from '../../models/menu.model';
 import './menu.scss';
 let template = require('./menu.template.html');
 
 @Component({
     templateUrl  : template,
+    selector : 'ma-menu',
     bindings : {
         menuItems : "="
     }

@@ -6,8 +6,5 @@ export class AppController {
 
     /* @ngInject */
     constructor() {
-        this.menuItems.push({ title : 'Dashboard'  , url : '/#' });
-        this.menuItems.push({ title : 'Positions'  , url : '/#/positions' });
-        this.menuItems.push({ title : 'Assessments', url : '/#/assessments' });
     }
 }
