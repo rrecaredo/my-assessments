@@ -2,9 +2,11 @@ import {MenuComponent, HomeComponent, DashboardComponent, LoginComponent} from '
 import {AppController} from './app.controller';
 import {Configuration} from './app.config';
 import {LayoutService} from './services';
+
+import './assets/styles/vendor/angular-material.css';
 import ms from './utils/make-selector';
 
-let appDependencies : string[] = ['ui.router', 'toastr'];
+let appDependencies : string[] = ['ui.router', 'toastr', 'ngMaterial'];
 
 let appModule = angular.module("app", appDependencies);
 

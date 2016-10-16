@@ -1,6 +1,10 @@
-<nav>
-    <nav class="menu">
-        <a ng-repeat="item in vm.menuItems track by item.title" ui-sref="{{::item.state}}" class="menu__item">{{::item.title}}</a>
+<md-toolbar class="menu">
+    <h2 class="md-toolbar-tools">
+
+        <md-button ng-repeat="item in vm.menuItems track by item.title" aria-label="Go Back">
+            <a ui-sref="{{::item.state}}">{{::item.title}}</a>
+        </md-button>
+
         <a ui-sref="login" class="menu__item">Login</a>
-    </nav>
-</nav>
+    </h2>
+</md-toolbar>

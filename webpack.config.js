@@ -11,6 +11,7 @@ var config = {
     entry: {
         app: ['./app/client/app.bootstrapper'],
         vendor : ['angular', 'angular-ui-router', 'angular-animate', 'angular-toastr', 'angular-cookies',
+                  'angular-aria', 'angular-material',
                   'moment', 'lodash', 'angular-moment-picker', 'angular-file-upload', 'angular-cookies']
     },
     output: {
