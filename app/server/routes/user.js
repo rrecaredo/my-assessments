@@ -2,23 +2,32 @@ var express  = require('express');
 var router   = express.Router();
 let passport = require('passport');
 let jwt      = require('jsonwebtoken');
-var User     = require('../models/User');
+var User     = require('../models/user');
 let config   = require('../config');
+let util     = require('util');
+let auth     = require('../auth');
 
 //-------------------------------------------
 // Register new users
 //-------------------------------------------
 
 router.post('/register', function (req, res) {
-    if (!req.body.user || !req.body.password) {
+
+    req.checkBody('name', 'Invalid name').notEmpty().isAlpha();
+    req.checkBody('user', 'Invalid email').notEmpty().isEmail();
+    req.checkBody('password', 'Invalid password').notEmpty();
+    req.checkBody('role', 'Invalid role').notEmpty().isAlpha();
+
+    var errors = req.validationErrors();
+    if (errors) {
         res.json({
             success: false,
-            message: 'Please enter email and password.'
+            message: 'There have been validation errors: ' + util.inspect(errors)
         });
     }
     else {
         let newUser = new User({
-            email   : req.body.user,
+            user    : req.body.user,
             password: req.body.password,
             name    : req.body.name,
             role    : req.body.role || 'user'
@@ -44,7 +53,7 @@ router.post('/register', function (req, res) {
 // Get all Users
 //-------------------------------------------
 
-router.get('/', function (req, res) {
+router.get('/', auth.isAuthenticated, auth.allowedRoles(['admin']), function (req, res) {
     User.find({}, function (err, users) {
         res.json(users);
     });
@@ -54,11 +63,25 @@ router.get('/', function (req, res) {
 // Authenticate and generate JWT
 //-------------------------------------------
 
-router.post('/auth', (req, res) => {
-    User.findOne({ email: req.body.user }, function (err, user) {
+router.post('/login', (req, res) => {
 
-        var success = { success : true, message  : 'Authentication successfull' };
-        var failed  = { success : false, message : 'Authentication failed' };
+    req.checkBody('user', 'Invalid email').notEmpty().isEmail();
+    req.checkBody('password', 'Invalid password').notEmpty();
+
+    var errors = req.validationErrors();
+    if (errors) {
+        res.json({
+            success: false,
+            message: 'There have been validation errors: ' + util.inspect(errors)
+        });
+
+        return;
+    }
+
+    User.findOne({user: req.body.user}, function (err, user) {
+
+        var success = {success: true, message: 'Authentication successfull'};
+        var failed  = {success: false, message: 'Authentication failed'};
 
         if (err)
             throw err;
@@ -68,9 +91,9 @@ router.post('/auth', (req, res) => {
         else {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
-                    var token = jwt.sign(user, config.auth.secret, { expiresIn: "2 hours" });
+                    var token = jwt.sign(user, config.auth.secret, {expiresIn: "2 hours"});
 
-                    res.json(Object.assign(success, token));
+                    res.json({token: 'JWT ' + token, success});
                 }
                 else {
                     res.send(failed);

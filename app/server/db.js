@@ -4,9 +4,9 @@ const util     = require('util');
 module.exports = (db, debug) => {
     mongoose.connect(db, {}, (err)=> {
         if (err) {
-            debug('Connection Error: ', err);
+            console.log('Connection Error: ', err);
         } else {
-            debug('Successfully Connected');
+            console.log('Successfully Connected');
         }
     });
     mongoose.connection.on('error', () => {
@@ -15,7 +15,7 @@ module.exports = (db, debug) => {
 
     if (debug) {
         mongoose.set('debug', (collectionName, method, query, doc) => {
-            debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+            console.log(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
         });
     }
 };

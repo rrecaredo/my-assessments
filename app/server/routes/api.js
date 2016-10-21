@@ -1,7 +1,6 @@
 var express    = require('express');
 var router     = express.Router();
-const auth     = require('.,/auth')();
-var Assessment = require('./models/assessment');
+var Assessment = require('../models/assessment');
 
 const api = () => {
     router.route('/assessments')

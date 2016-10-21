@@ -7,7 +7,7 @@ var UserSchema = new Schema({
         type    : String,
         required: true
     },
-    email   : {
+    user   : {
         type     : String,
         lowercase: true,
         unique   : true,
@@ -18,7 +18,7 @@ var UserSchema = new Schema({
         required: true
     },
     role    : {
-        type    : Boolean,
+        type    : String,
         required: false,
         default : 'user'
     }

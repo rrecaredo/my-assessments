@@ -6,6 +6,7 @@
   "scripts": {
     "build:client": "webpack --config webpack.config.js --watch --colors",
     "start": "node tools/node_tasks/dev-server.js --colors",
+    "server": "nodemon app/server/server.js",
     "test:phantom": "karma start karma.conf.js --browsers PhantomJS",
     "test:chrome": "karma start karma.conf.js --auto-watch --browsers Chrome",
     "coverage:calculate": "karma start karma.conf.js --browsers PhantomJS --reports",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/rrecaredo/my-assessments#readme",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
+    "connect-flash": "^0.1.1",
     "css-loader": "0.18.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
@@ -85,16 +87,16 @@
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "express-validator": "^2.20.10",
     "font-awesome": "^4.6.3",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
-    "mongoose": "^4.6.3",
+    "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
     "path": "^0.12.7",
-    "permission": "^1.0.4",
     "serve-favicon": "^2.3.0",
     "yargs": "^4.3.2"
   }

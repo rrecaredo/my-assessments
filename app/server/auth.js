@@ -1,9 +1,10 @@
 let JwtStrategy = require('passport-jwt').Strategy;
 let ExtractJwt  = require('passport-jwt').ExtractJwt;
-let User        = require('../models/User');
-let config      = require('../config/');
+let User        = require('./models/user');
+let config      = require('./config');
+let passport    = require('passport');
 
-module.exports = function (passport) {
+module.exports = () => {
     let opts = {
         jwtFromRequest: ExtractJwt.fromAuthHeader(),
         secretOrKey   : config.auth.secret
@@ -30,6 +31,25 @@ module.exports = function (passport) {
         },
         authenticate: function() {
             return passport.authenticate("jwt", false);
-        }
+        },
     }
 };
+
+module.exports.allowedRoles = function(roles) {
+    if (typeof roles === 'string') roles = [roles];
+
+    return _middleware.bind(this);
+
+    function _middleware(req, res, next) {
+        let rol = req.user.role;
+
+        console.log(roles.indexOf(rol));
+
+        if (roles.indexOf(rol) > -1)
+            return next();
+        else
+            throw new Error('Unauthorizedf');
+    }
+}
+
+module.exports.isAuthenticated = passport.authenticate('jwt', { session: false });
