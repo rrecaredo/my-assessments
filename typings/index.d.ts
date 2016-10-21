@@ -1,5 +1,6 @@
 /// <reference path="globals/angular-animate/index.d.ts" />
 /// <reference path="globals/angular-cookies/index.d.ts" />
+/// <reference path="globals/angular-material/index.d.ts" />
 /// <reference path="globals/angular-mocks/index.d.ts" />
 /// <reference path="globals/angular-toastr/index.d.ts" />
 /// <reference path="globals/angular-ui-router/index.d.ts" />

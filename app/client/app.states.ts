@@ -11,10 +11,7 @@ const home = {
         },
         'nav@home': {
             template: '<ma-menu menu-items="$resolve.menuItems"></ma-menu>',
-            controllerAs: 'vm',
-            resolve: {
-                menuItems: getMenuItems
-            }
+            controllerAs: 'vm'
         },
         'body@home': {
             template: '<ma-dashboard></ma-dashboard>',
@@ -53,11 +50,6 @@ const login = {
     template: '<ma-login></ma-login>',
     controllerAs: 'vm'
 };
-
-/* @ngInject */
-function getMenuItems(layoutService : ILayoutService) : model.IMenuItem[] {
-    return layoutService.getMenuItems();
-}
 
 export let states = [home, positions, assessments, login,];
 

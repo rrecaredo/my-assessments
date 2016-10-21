@@ -5,4 +5,10 @@ body {
 ma-home {
   display: flex;
   height: 100%;
+
+  md-toolbar.md-medium-tall {
+    min-height: 65px;
+    max-height: 65px;
+    height: 65px;
+  }
 }
