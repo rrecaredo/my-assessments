@@ -6,7 +6,8 @@ let passport    = require('passport');
 
 module.exports = () => {
     let opts = {
-        jwtFromRequest: ExtractJwt.fromAuthHeader(),
+        jwtFromRequest: ExtractJwt.fromAuthHeader(), // TODO: Crteate a custom cookie extractor
+                                                     // Example : https://github.com/themikenicholson/passport-jwt#user-content-writing-a-custom-extractor-function
         secretOrKey   : config.auth.secret
     };
 

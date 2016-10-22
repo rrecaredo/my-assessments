@@ -7,7 +7,7 @@ export interface ILayoutService {
 export class LayoutService implements ILayoutService {
     getMenuItems(): model.IMenuItem[] {
         return [{ title : 'Dashboard'  , state : 'home' },
-                { title : 'Positions'  , state : 'positions' },
-                { title : 'Assessments', state : 'assessments' }];
+            { title : 'Positions'  , state : 'positions' },
+            { title : 'Assessments', state : 'assessments' }];
     }
 }

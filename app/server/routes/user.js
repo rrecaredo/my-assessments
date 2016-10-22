@@ -93,7 +93,7 @@ router.post('/login', (req, res) => {
                 if (isMatch && !err) {
                     var token = jwt.sign(user, config.auth.secret, {expiresIn: "2 hours"});
 
-                    res.json({token: 'JWT ' + token, success});
+                    res.json({token: 'JWT ' + token, success, name : user.name, user : user.user, role : user.role });
                 }
                 else {
                     res.send(failed);

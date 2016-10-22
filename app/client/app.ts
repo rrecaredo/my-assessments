@@ -1,7 +1,7 @@
 import {MenuComponent, HomeComponent, DashboardComponent, LoginComponent} from './components';
 import {AppController} from './app.controller';
 import {Configuration} from './app.config';
-import {LayoutService} from './services';
+import {LayoutService, AuthService} from './services';
 
 import './assets/styles/vendor/angular-material.css';
 import ms from './utils/make-selector';
@@ -14,8 +14,10 @@ appModule.config(Configuration.enableCors)
     .config(Configuration.exceptionConfig)
     .config(Configuration.statesConfig)
     .factory("httpInterceptor", Configuration.httpInterceptorFactory)
+    .constant('apiUrl', 'http://localhost:8080') //TODO: Inject this value with webpack according to the enviroment.
     .controller('appController', AppController)
     .service('layoutService', LayoutService)
+    .service('authService', AuthService)
     .component(ms(HomeComponent), HomeComponent)
     .component(ms(LoginComponent), LoginComponent)
     .component(ms(MenuComponent), MenuComponent)

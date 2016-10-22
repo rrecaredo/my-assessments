@@ -3,13 +3,11 @@
         <div class="box">
             <h1>MY ASSESSMENTS</h1>
             <h2>Login To Your Account</h2>
-            <form>
-                <input placeholder="Username" type="text"></input>
-                <input placeholder="Password" type="password"></input>
-                <button>Login</button>
+            <form ng-submit="vm.login(vm.username, vm.password)" class="form">
+                <input placeholder="Username" type="text" ng-model="vm.username"></input>
+                <input placeholder="Password" type="password" ng-model="vm.password"></input>
+                <button type="submit">Login</button>
             </form>
         </div>
     </div>
 </div>
-
-
