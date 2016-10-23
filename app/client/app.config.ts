@@ -1,19 +1,18 @@
 import {states} from './app.states';
+import {IAuthService} from './services/auth.service';
 
 export class Configuration {
     /* @ngInject */
-    static httpInterceptorFactory() {
+    static httpInterceptorFactory($state: ng.ui.IStateService, authService : IAuthService) {
         return {
             request(config: ng.IRequestConfig) {
                 if (config.url.indexOf(".html") === -1) {
-                    Configuration.transformHeader(config);
+                    Configuration.transformHeader(config, authService);
                 }
                 return config;
             },
-            response(response: any) {
-            },
-            responseError(response: any) {
-            }
+            response(response: any) { },
+            responseError(response: any) { }
         };
     }
 
@@ -39,8 +38,33 @@ export class Configuration {
         });
     }
 
-    private static transformHeader(config: ng.IRequestConfig) {
-        // Add JWT Token
+    /* @ngInject */
+    static stateHandlers($rootScope: ng.IRootScopeService, authService : IAuthService, $state : ng.ui.IStateService) {
+        //TODO: Convert to a provider and allow configuration (login, unauthorized)
+        $rootScope.$on('$stateChangeStart', (evt: any, to: any, params: any) => {
+
+            if (to.name === 'login' && authService.getToken())
+                $state.go('home');
+
+            else if (to.data && to.data.requiresLogin) {
+                if (!authService.getToken()) {
+                    evt.preventDefault();
+                    $state.go('login');
+                }
+            }
+
+            console.log(evt, to, params);
+        });
+    }
+
+    /* @ngInject */
+    static materialConfig($mdThemingProvider : ng.material.IThemingProvider) {
+        $mdThemingProvider.theme('altTheme').primaryPalette('teal');
+        $mdThemingProvider.setDefaultTheme('altTheme');
+    }
+
+    private static transformHeader(config: ng.IRequestConfig, authService : IAuthService) {
+        config.headers["Authorization"] = authService.getToken();
     };
 
     /* @ngInject */

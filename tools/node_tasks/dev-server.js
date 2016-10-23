@@ -16,6 +16,8 @@ devConfig.plugins.push(new OpenBrowserPlugin({ url: "http://" + host + ":" + por
 devConfig.entry.app.push("webpack-dev-server/client?http://localhost:8081",
                            "webpack/hot/dev-server");
 
+console.log(process.argv);
+
 new WebpackDevServer(webpack(devConfig), {
     contentBase: path.join(__dirname, "/../../", "app/build/dist"),
     quiet       : false,

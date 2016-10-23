@@ -11,12 +11,12 @@ var config = {
     entry: {
         app: ['./app/client/app.bootstrapper'],
         vendor : ['angular', 'angular-ui-router', 'angular-animate', 'angular-toastr', 'angular-cookies',
-                  'angular-aria', 'angular-material',
+                  'angular-aria', 'angular-material', 'angular-storage', 'angular-material-icons',
                   'moment', 'lodash', 'angular-moment-picker', 'angular-file-upload', 'angular-cookies']
     },
     output: {
         filename : 'build.js',
-        path     : path.join(__dirname, 'app/build/dev')
+        path     : path.join(__dirname, 'app/build/dev'),
     },
     resolve: {
         root       : path.resolve(__dirname, './..'),

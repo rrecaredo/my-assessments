@@ -6,13 +6,15 @@ import {LayoutService, AuthService} from './services';
 import './assets/styles/vendor/angular-material.css';
 import ms from './utils/make-selector';
 
-let appDependencies: string[] = ['ui.router', 'toastr', 'ngMaterial'];
+let appDependencies: string[] = ['ui.router', 'toastr', 'ngMaterial', 'angular-storage', 'ngMdIcons'];
 
 let appModule = angular.module("app", appDependencies);
 
 appModule.config(Configuration.enableCors)
     .config(Configuration.exceptionConfig)
     .config(Configuration.statesConfig)
+    .config(Configuration.materialConfig)
+    .run(Configuration.stateHandlers)
     .factory("httpInterceptor", Configuration.httpInterceptorFactory)
     .constant('apiUrl', 'http://localhost:8080') //TODO: Inject this value with webpack according to the enviroment.
     .controller('appController', AppController)
@@ -21,21 +23,9 @@ appModule.config(Configuration.enableCors)
     .component(ms(HomeComponent), HomeComponent)
     .component(ms(LoginComponent), LoginComponent)
     .component(ms(MenuComponent), MenuComponent)
-    .component(ms(DashboardComponent), DashboardComponent);
-
-appModule.config(function ($mdThemingProvider : ng.material.IThemingProvider) {
-    $mdThemingProvider.theme('altTheme')
-        .primaryPalette('teal');
-
-    $mdThemingProvider.setDefaultTheme('altTheme');
-});
-
-
-appModule.run(function ($rootScope: ng.IRootScopeService) {
-
-    $rootScope.$on('$stateChangeStart', function (evt: any, to: any, params: any) {
-        console.log(evt, to, params);
+    .component(ms(DashboardComponent), DashboardComponent)
+    .config((storeProvider : any) => {
+        storeProvider.setStore('sessionStorage');
     });
-});
 
 export default appModule;

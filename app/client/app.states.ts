@@ -4,10 +4,13 @@ import * as model from './models';
 const home = {
     name: 'home',
     url: '/',
+    data : {
+        requiresLogin : true
+    },
     views: {
         '@': {
             template: '<ma-home></ma-home>',
-            controllerAs : 'vm'
+            controllerAs: 'vm'
         },
         'nav@home': {
             template: '<ma-menu menu-items="$resolve.menuItems"></ma-menu>',
@@ -21,9 +24,13 @@ const home = {
 };
 
 const positions = {
-    name : 'positions',
+    name: 'positions',
     parent: 'home',
-    url : '/positions',
+    url: '/positions',
+    data : {
+        requiresLogin : true,
+        roles : ['admin']
+    },
     views: {
         'body@home': {
             template: 'Positions',
@@ -33,9 +40,13 @@ const positions = {
 };
 
 const assessments = {
-    name : 'assessments',
+    name: 'assessments',
     parent: 'home',
-    url : '/assessments',
+    url: '/assessments',
+    data : {
+        requiresLogin : true,
+        roles : ['admin']
+    },
     views: {
         'body@home': {
             template: 'Assessments',
@@ -47,9 +58,11 @@ const assessments = {
 const login = {
     name: 'login',
     url: '/login',
+    data : {
+        requiresLogin : false
+    },
     template: '<ma-login></ma-login>',
     controllerAs: 'vm'
 };
 
-export let states = [home, positions, assessments, login,];
-
+export let states = [home, positions, assessments, login];
