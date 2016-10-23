@@ -1,13 +1,13 @@
 import * as model from '../models';
 
 export interface ILayoutService {
-    getMenuItems(): model.IMenuItem[];
+    getNavigationItems(): model.INavigationItem[];
 }
 
 export class LayoutService implements ILayoutService {
-    getMenuItems(): model.IMenuItem[] {
-        return [{ title : 'Dashboard'  , state : 'home' },
-            { title : 'Positions'  , state : 'positions' },
-            { title : 'Assessments', state : 'assessments' }];
+    getNavigationItems(): model.INavigationItem[] {
+        return [{ title : 'Home'       , state : 'home'        , icon : 'home'       },
+                { title : 'Positions'  , state : 'positions'   , icon : 'people'     },
+                { title : 'Assessments', state : 'assessments' , icon : 'assignment' }];
     }
 }

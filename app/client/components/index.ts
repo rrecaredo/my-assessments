@@ -1,4 +1,4 @@
 export * from './home';
-export * from './menu';
+export * from './sub-navigation';
 export * from './dashboard';
 export * from './auth/login/login.component';

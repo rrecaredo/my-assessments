@@ -35,7 +35,12 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use(express.static('/'));
-app.use(express.static(path.join(__dirname, '../build/dev')));
+
+if (process.env.NODE_ENV === 'dev' && yargs.hot)
+    app.use(express.static(path.join('/')));
+else
+    app.use(express.static(path.join(__dirname, '../build/dev')));
+
 app.use(favicon(__dirname + '/../static/favicon.ico'));
 
 //----------------------------------------------

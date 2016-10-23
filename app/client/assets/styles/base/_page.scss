@@ -5,8 +5,8 @@
 body {
   overflow: auto;
   background-color: white;
-  font-size: $font-size-base;
-  @extend %Roboto-light;
+  font-size: $font-size-fa;
+  @extend %Roboto-regular;
   margin: 0;
 }
 
@@ -14,6 +14,6 @@ input[type=text]::-ms-clear {
   display: none;
 }
 
-.content {
-  padding: grid(2.5);
+a {
+  text-decoration: none;
 }

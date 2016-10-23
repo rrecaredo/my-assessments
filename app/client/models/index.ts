@@ -1,1 +1,2 @@
-export * from './menu.model';
+export * from './navigation.model';
+export * from './user-info.model';

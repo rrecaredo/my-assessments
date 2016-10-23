@@ -1,21 +1,33 @@
+<!-- Side Menu -->
+
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <md-toolbar class="md-medium-tall md-hue-2">
-        <div layout="column" class="md-toolbar-tools-bottom inset">
-            <div>Ricardo Recaredo</div>
-            <div>rrecaredo@gmail.com</div>
-        </div>
+    <md-toolbar class="md-medium-tall md-hue-2 md-toolbar--home">
+        <span class="md-title layout-logo">my-assessments</span>
     </md-toolbar>
     <md-list>
         <md-item ng-repeat="item in vm.menuItems">
-            <md-button aria-label="{{::item.title}}">
-                <a ui-sref="{{::item.state}}">{{::item.title}}</a>
-            </md-button>
+            <a ui-sref="{{::item.state}}">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{::item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{::item.title}}
+                    </div>
+                </md-item-content>
+            </a>
         </md-item>
     </md-list>
 </md-sidenav>
 
+<!-- Body navigation -->
+
 <div class="u-full-width">
-    <div ui-view="nav" class="u-full-width"></div>
-    <div ui-view="body" class="u-full-width"></div>
+    <div flex layout="row" layout-fill>
+        <md-content flex class="u-full-width md-default-theme">
+            <div ui-view="nav" class="u-full-width"></div>
+            <div ui-view="body" ></div>
+        </md-content>
+    </div>
+
 </div>
 

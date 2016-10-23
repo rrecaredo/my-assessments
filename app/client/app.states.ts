@@ -13,7 +13,7 @@ const home = {
             controllerAs: 'vm'
         },
         'nav@home': {
-            template: '<ma-menu menu-items="$resolve.menuItems"></ma-menu>',
+            template: '<ma-subnavigation items="$resolve.menuItems"></ma-subnavigation>',
             controllerAs: 'vm'
         },
         'body@home': {

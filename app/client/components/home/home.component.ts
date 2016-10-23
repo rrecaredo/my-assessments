@@ -1,5 +1,5 @@
 import * as model from '../../models';
-import {ILayoutService} from '../../services';
+import {ILayoutService, IAuthService} from '../../services';
 import {Component} from '../../utils/decorators';
 import './home.scss';
 let template = require('./home.template.html');
@@ -13,10 +13,12 @@ let template = require('./home.template.html');
 })
 export class HomeComponent {
 
-    menuItems : model.IMenuItem[];
+    menuItems : model.INavigationItem[];
+    userInfo  : any = {};
 
     /* @ngInject */
-    constructor(layoutService : ILayoutService) {
-        this.menuItems = layoutService.getMenuItems();
+    constructor(layoutService : ILayoutService, authService : IAuthService) {
+        this.userInfo = authService.getToken();
+        this.menuItems = layoutService.getNavigationItems();
     }
 }

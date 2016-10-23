@@ -3,17 +3,21 @@ import {IAuthService} from './services/auth.service';
 
 export class Configuration {
     /* @ngInject */
-    static httpInterceptorFactory($state: ng.ui.IStateService, authService : IAuthService) {
+    static httpInterceptorFactory(store : any) {
         return {
             request(config: ng.IRequestConfig) {
                 if (config.url.indexOf(".html") === -1) {
-                    Configuration.transformHeader(config, authService);
+                    Configuration.transformHeader(config, store);
                 }
+
                 return config;
-            },
-            response(response: any) { },
-            responseError(response: any) { }
+            }
         };
+    }
+
+    /* @ngInject */
+    static registerInterceptors($httpProvider : ng.IHttpProvider) {
+        $httpProvider.interceptors.push("httpInterceptor");
     }
 
     /* @ngInject */
@@ -21,8 +25,6 @@ export class Configuration {
 
         ($httpProvider.defaults as any).useXDomain = true;
         delete $httpProvider.defaults.headers.common["X-Requested-With"];
-
-        //$httpProvider.interceptors.push("httpInterceptor");
     }
 
     /* @ngInject */
@@ -63,8 +65,11 @@ export class Configuration {
         $mdThemingProvider.setDefaultTheme('altTheme');
     }
 
-    private static transformHeader(config: ng.IRequestConfig, authService : IAuthService) {
-        config.headers["Authorization"] = authService.getToken();
+    private static transformHeader(config: ng.IRequestConfig, store : any) {
+        let authObj = store.get('auth');
+
+        if (authObj && authObj.token)
+            config.headers["Authorization"] = store.get('auth').token;
     };
 
     /* @ngInject */

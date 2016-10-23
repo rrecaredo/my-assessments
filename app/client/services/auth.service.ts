@@ -1,13 +1,16 @@
+import * as model from '../models/';
+
 export interface IAuthService {
     login(user: string, password: string): ng.IPromise<boolean>;
     logout(): void;
-    getToken() : string;
+    getToken() : any;
 }
 
 export class AuthService implements IAuthService {
 
     /* @ngInject */
-    constructor(private $http: ng.IHttpService, private apiUrl: string, private store: any) {
+    constructor(private $http: ng.IHttpService, private apiUrl: string, private store: any,
+                private $state : ng.ui.IStateService, private $rootScope : ng.IRootScopeService) {
     }
 
     login(user: string, password: string): ng.IPromise<boolean> {
@@ -17,6 +20,7 @@ export class AuthService implements IAuthService {
                         const auth = _.pick(result.data, ['token', 'name', 'user', 'role']);
 
                         this.store.set('auth', auth);
+                        this.$rootScope['auth'] = auth;
 
                         return true;
                     }
@@ -28,9 +32,12 @@ export class AuthService implements IAuthService {
 
     logout() {
         this.store.remove('auth');
+        delete this.$rootScope['auth'];
+        this.$state.go('login');
     }
 
-    getToken() : string {
-        return this.store.get('auth');
+    getToken() : any {
+        let authObj : model.IUserInfo = this.store.get('auth') || {};
+        return authObj.token;
     }
 }
