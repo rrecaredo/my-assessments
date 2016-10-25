@@ -1,7 +1,14 @@
 import {states} from './app.states';
 import {IAuthService} from './services/auth.service';
+import {INgReduxProvider} from 'ng-redux';
+import {combineReducers} from 'redux';
+import thunk from 'redux-thunk';
+let createLogger : any = require('redux-logger');
+import {router} from 'redux-ui-router';
+import {stateGo} from 'redux-ui-router';
 
 export class Configuration {
+
     /* @ngInject */
     static httpInterceptorFactory(store : any) {
         return {
@@ -41,21 +48,20 @@ export class Configuration {
     }
 
     /* @ngInject */
-    static stateHandlers($rootScope: ng.IRootScopeService, authService : IAuthService, $state : ng.ui.IStateService) {
+    static stateHandlers($rootScope: ng.IRootScopeService, authService : IAuthService, $ngRedux : NgRedux.INgRedux) {
+
         //TODO: Convert to a provider and allow configuration (login, unauthorized)
         $rootScope.$on('$stateChangeStart', (evt: any, to: any, params: any) => {
 
             if (to.name === 'login' && authService.getToken())
-                $state.go('home');
+                $ngRedux.dispatch(stateGo('home', {}));
 
             else if (to.data && to.data.requiresLogin) {
                 if (!authService.getToken()) {
                     evt.preventDefault();
-                    $state.go('login');
+                    $ngRedux.dispatch(stateGo('login', {}));
                 }
             }
-
-            console.log(evt, to, params);
         });
     }
 
@@ -63,6 +69,22 @@ export class Configuration {
     static materialConfig($mdThemingProvider : ng.material.IThemingProvider) {
         $mdThemingProvider.theme('altTheme').primaryPalette('teal');
         $mdThemingProvider.setDefaultTheme('altTheme');
+    }
+
+    /* @ngInject */
+    static configureRedux($ngReduxProvider : INgReduxProvider, devToolsServiceProvider : NgReduxDevTools.IDevToolsServiceProvider) {
+
+        const rootReducer = combineReducers({ router });
+
+        const logger = createLogger({
+            level: 'info',
+            collapsed: true
+        });
+
+        const middlewares = [thunk, logger, 'ngUiRouterMiddleware'];
+        const enhancers   = [devToolsServiceProvider.instrument()];
+
+        $ngReduxProvider.createStoreWith(rootReducer, middlewares, enhancers);
     }
 
     private static transformHeader(config: ng.IRequestConfig, store : any) {

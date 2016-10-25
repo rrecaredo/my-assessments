@@ -12,7 +12,8 @@ var config = {
         app: ['./app/client/app.bootstrapper'],
         vendor : ['angular', 'angular-ui-router', 'angular-animate', 'angular-toastr', 'angular-cookies',
                   'angular-aria', 'angular-material', 'angular-storage', 'angular-material-icons',
-                  'moment', 'lodash', 'angular-moment-picker', 'angular-file-upload', 'angular-cookies']
+                  'moment', 'lodash', 'angular-moment-picker', 'angular-file-upload', 'angular-cookies',
+                  'redux', 'ng-redux', 'redux-ui-router', 'redux-logger', 'redux-thunk', 'ng-redux-dev-tools']
     },
     output: {
         filename : 'build.js',
@@ -22,13 +23,14 @@ var config = {
         root       : path.resolve(__dirname, './..'),
         extensions : ['', '.ts', '.js', '.json'],
         alias: {
+            'ng-redux-dev-tools' : path.join(__dirname,'app/client/assets/scripts/ng-redux-dev-tools.js')
         }
     },
     resolveLoader: {
         modulesDirectories: ['node_modules']
     },
     devtool: 'inline-source-map',
-    stats: { children: false },
+    stats: { children: false, warnings : false },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
         new htmlWebpackPlugin({
@@ -55,7 +57,7 @@ var config = {
      config.plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true, mangle: true, compress: { warnings: false } }));
  }
  else {
-     config.plugins.push(new WebpackNotifierPlugin());
+     //config.plugins.push(new WebpackNotifierPlugin()); // King of annoying
  }
 
  module.exports = config;

@@ -22,7 +22,6 @@
   "include": [
     "client/app/**/*.ts",
     "typings/index.d.ts",
-    "typings/lodash.d.ts",
     "typings/custom.d.ts"
   ],
   "compileOnSave" : false,
